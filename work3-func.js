@@ -8,6 +8,25 @@ function pipeline(...fns) {
     };
 }
 
+function pipelins(...fns) {
+    return function(x) {
+        fns.reduce(function(prev, curFunc) {
+            return curFunc(prev);
+        }, 0)
+    }
+}
+
+function pipeline(...fns) {
+    return function(x) {
+        let result = x;
+        fns.forEach(function(fn) {
+            result = fn(result);
+        })
+        return result;
+    }
+};
+
+
 
 const pipelineFunc = pipeline(double, increment, square)
 console.log(pipelineFunc(2)); // ((2 * 2) + 1)^2 = 25
