@@ -4,9 +4,10 @@ const square = x => x * x;
 
 function pipeline(...fns) {
     return function (x) {
-        return square(increment(double(x)));
+        return fns.reduce((acc, fn) => fn(acc), x);
     };
 }
 
+
 const pipelineFunc = pipeline(double, increment, square)
-pipelineFunc(2) // ((2 * 2) + 1)^2 = 25
+console.log(pipelineFunc(2)); // ((2 * 2) + 1)^2 = 25
