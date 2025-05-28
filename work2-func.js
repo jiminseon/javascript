@@ -9,6 +9,6 @@ function withLoggin(fn) {
     }
 }
 
-const addWithLogging = withLogging(add);
+const addWithLogging = withLoggin(add);
 const result = addWithLogging(1, 2); // 로그 출력 후 3 반환
 console.log("결과:", result); // → 결과: 3
