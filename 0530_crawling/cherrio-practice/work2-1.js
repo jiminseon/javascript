@@ -41,7 +41,7 @@ const articleData = [];
     }
 
     const data = JSON.stringify(articleData, null, 2);
-    await fs.promises.writeFile("workData2-1.json", data);
+    await fs.promises.writeFile("workData2-2.json", data);
   } catch (err) {
     console.error("에러 발생:", err);
   }
