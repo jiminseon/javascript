@@ -23,13 +23,13 @@ async function siseUrl(siseurl) {
 
     for (let i = 0; i < lists.length; i++) {
       const listNode = lists.eq(i).find(".tah");
-      const date = listNode.eq(0).text(); // 신문사
-      const finalPrice = listNode.eq(1).text(); // 제목
-      const change = listNode.eq(2).text().trim(); //요약설명
-      const price = listNode.eq(3).text(); //날짜
-      const high = listNode.eq(4).text(); // url
-      const low = listNode.eq(5).text(); // url
-      const trading = listNode.eq(6).text(); // url
+      const date = listNode.eq(0).text();
+      const finalPrice = listNode.eq(1).text();
+      const change = listNode.eq(2).text().trim();
+      const price = listNode.eq(3).text();
+      const high = listNode.eq(4).text();
+      const low = listNode.eq(5).text();
+      const trading = listNode.eq(6).text();
 
       siseData.push({
         date,
