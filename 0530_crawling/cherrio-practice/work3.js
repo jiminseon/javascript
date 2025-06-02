@@ -7,7 +7,7 @@ const detailData = [];
 
 async function detailNews(url) {
   const detailUrl = await fetch(url);
-  console.log(url);
+  console.log(detailUrl);
   const text = await detailUrl.text();
 
   return text;
