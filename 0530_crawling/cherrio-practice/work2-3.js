@@ -18,18 +18,24 @@ const url =
 
     //가져올 데이터 (제목, 신문사, 요약설명, 날짜, URL)
     const lists = $(".c-list-basic > li");
-    //console.log(lists.eq(0).find(".tit_item > .txt_info").text());
-    console.log(lists.length);
+    // console.log(
+    //   lists.eq(0).find(".c-item-content img").attr("data-original-src")
+    // );
+    // console.log(lists.length);
 
     const articleData = [];
 
     for (let i = 0; i < 10; i++) {
       const listNode = lists.eq(i);
+
       const newspaper = listNode.find(".tit_item .txt_info").first().text(); // 신문사
       const title = listNode.find(".item-title").text(); // 제목
       const summation = listNode.find(".item-contents").text(); //요약설명
       const date = listNode.find(".gem-subinfo > .txt_info").text(); //날짜
       const url = listNode.find(".item-title > strong > a").attr("href"); // url
+      const image = listNode
+        .find(".c-item-content img")
+        .attr("data-original-src"); // image
 
       articleData.push({
         newspaper,
@@ -37,13 +43,14 @@ const url =
         summation,
         date,
         url,
+        image,
       });
     }
 
     // JSON으로 변환
     const data = JSON.stringify(articleData, null, 2);
 
-    await fs.promises.writeFile("workData2-1.json", data);
+    await fs.promises.writeFile("workData2-3.json", data);
   } catch (err) {
     console.error(err);
   }
