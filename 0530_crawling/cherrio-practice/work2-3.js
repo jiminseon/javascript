@@ -50,3 +50,63 @@ const articleData = [];
     console.error("에러 발생:", err);
   }
 })();
+
+//-----------------------------------------------
+//------------------------------------------------
+// 강사님
+import * as cheerio from "cheerio";
+
+async function scrapeDaumNews(query, page) {
+  const baseUrl = "https://search.daum.net/search";
+  const url = `${baseUrl}?q=${query}&p=${page}&w=news`;
+
+  const resp = await fetch(url);
+  const html = await resp.text();
+  fs.writeFileSync(`${query}-${page}.html`, html);
+
+  const $ = cheerio.load(html);
+
+  const newsListTags = $(".c-list-basic > li");
+
+  const result = [];
+
+  for (let i = 0; i < newsListTags.length; i++) {
+    const target = newsListTags.eq(i);
+
+    const press = target.find(".tit_item").text().trim();
+    const titleTag = target.find(".c-item-content .item-title a");
+    const descTag = target.find(".item-contents .conts-desc");
+    const dateTag = target.find(".gem-subinfo");
+
+    const imageTag = target.find(".item-thumb img");
+    // const imageSrc = imageTag.attr("src");
+    const imageSrc = imageTag.attr("data-original-src");
+
+    if (!titleTag.text()) {
+      continue;
+    }
+
+    result.push({
+      press: press,
+      title: titleTag.text().trim(),
+      url: titleTag.attr("href"),
+      desc: descTag.text().trim(),
+      date: dateTag.text().trim(),
+      image: imageSrc,
+    });
+  }
+  return result;
+}
+import * as fs from "fs";
+
+async function main() {
+  const result = [];
+  for (let p = 1; p <= 3; p++) {
+    const data = await scrapeDaumNews("금융서비스", p);
+    result.push(data);
+  }
+  fs.writeFileSync("./daum-news1.json", JSON.stringify(result));
+  console.log(result);
+}
+
+main();
