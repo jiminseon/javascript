@@ -27,7 +27,7 @@ export default function CountComponent() {
         "메모리를 잡아먹으면 리소스 해제 하는 함수를 return 해 주어야 합니다."
       );
     };
-  }, []);
+  }, []); // []가 두번째 인자(dependencyArray)
 
   useEffect(() => {
     console.log(`카운트가 증가할때마다 실행! \n -count: ${count}`);
