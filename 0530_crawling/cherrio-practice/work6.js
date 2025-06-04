@@ -47,3 +47,43 @@ async function fetchFundingData(startNum = 0, limit = 100) {
 
   await fs.writeFile("wadiz_funding.json", JSON.stringify(result, null, 2));
 })();
+
+// ------------------------------------------------
+// ------------------------------------------------
+// ------------------------------------------------
+// 강사님 코드
+
+import * as fs from "fs";
+import * as cheerio from "cheerio";
+
+async function main() {
+  const url = "https://service.wadiz.kr/api/search/funding";
+  const body = {
+    startNum: 0,
+    order: "recommend",
+    limit: 500,
+    categoryCode: "",
+    endYn: "",
+    isMakerClub: false,
+  };
+
+  const resp = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "content-type": "application/json",
+      "user-agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36",
+      referer: "https://www.wadiz.kr/",
+    },
+  });
+  //   const data = await resp.text();
+  //   const result = JSON.parse(data);
+
+  const result = await resp.json();
+
+  //   console.log(result.data.list.length);
+  fs.writeFileSync("wadiz.json", JSON.stringify(result.data.list));
+}
+
+main();
