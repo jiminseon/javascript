@@ -8,11 +8,15 @@ import HelloWorld from "./components/HelloWorld";
 import InputBtnComponent from "./components/inputBtnComponent";
 import MyButton from "./components/MyButton";
 import { useEffect, useState } from "react";
+import StopComponent from "./components/StopComponent";
+import TimerComponent from "./components/TimerComponent";
 
 function App() {
   return (
     <div>
-      <EmailComponent />
+      <TimerComponent />
+      {/* <StopComponent /> */}
+      {/* <EmailComponent /> */}
       {/* <InputBtnComponent /> */}
 
       {/* <ExampleUseState /> */}
