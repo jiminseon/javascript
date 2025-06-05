@@ -5,6 +5,8 @@ export default function BlinkCompnent({ text }) {
 
   const [count, setCount] = useState(0);
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     // setInterval(callbackFn, millisecond):  millisecond마다 callbackFn를 실행시키는 함수
 
