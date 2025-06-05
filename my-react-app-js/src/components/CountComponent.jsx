@@ -36,7 +36,6 @@ export default function CountComponent() {
   return (
     <div>
       <div>{count}</div>
-
       <button onClick={addCount}>1 증가</button>
     </div>
   );

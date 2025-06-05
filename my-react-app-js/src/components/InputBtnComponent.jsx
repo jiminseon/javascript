@@ -27,7 +27,7 @@ export default function ForbiddenWordApp() {
     let result = text;
     forbiddenWords.forEach((word) => {
       //const regex = new RegExp(word, "gi");
-      result = result.replace(word, "**");
+      result = result.replaceAll(word, "**");
     });
     return result;
   };
