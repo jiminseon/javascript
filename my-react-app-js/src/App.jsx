@@ -2,6 +2,7 @@ import BlinkCompnent from "./components/BlinkComponent";
 import CaptionImage from "./components/CaptionImage";
 import ClickComponent from "./components/ClickComponent";
 import CountComponent from "./components/CountComponent";
+import EmailComponent from "./components/emailComponent";
 import ExampleUseState from "./components/ExampleUseState";
 import HelloWorld from "./components/HelloWorld";
 import InputBtnComponent from "./components/inputBtnComponent";
@@ -11,15 +12,17 @@ import { useEffect, useState } from "react";
 function App() {
   return (
     <div>
-      <InputBtnComponent />
+      <EmailComponent />
+      {/* <InputBtnComponent /> */}
 
       {/* <ExampleUseState /> */}
       {/* <button onClick={() => setVisible(!click)}>{click ? "ON" : "OFF"}</button>
       <ClickComponent click={click} /> */}
 
-      {/* <BlinkCompnent text="이건 깜빡입니다." />
-        <CountComponent />
-        {/* <HelloWorld /> */}
+      {/* <ClickComponent /> */}
+      {/* <BlinkCompnent text="이건 깜빡입니다." /> */}
+      {/* <CountComponent /> */}
+      {/* <HelloWorld /> */}
       {/* <CaptionImage
           style={{ textAlign: "center" }}
           imgUrl="{이미지 url}"

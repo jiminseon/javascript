@@ -68,4 +68,4 @@ function sample() {
 }
 
 const a = sample();
-console.log(a);
+//console.log(a);
