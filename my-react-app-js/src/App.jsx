@@ -2,17 +2,20 @@ import BlinkCompnent from "./components/BlinkComponent";
 import CaptionImage from "./components/CaptionImage";
 import ClickComponent from "./components/ClickComponent";
 import CountComponent from "./components/CountComponent";
+import ExampleUseState from "./components/ExampleUseState";
 import HelloWorld from "./components/HelloWorld";
+import InputBtnComponent from "./components/inputBtnComponent";
 import MyButton from "./components/MyButton";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [click, setVisible] = useState(true);
-
   return (
     <div>
-      <button onClick={() => setVisible(!click)}>{click ? "ON" : "OFF"}</button>
-      <ClickComponent click={click} />
+      <InputBtnComponent />
+
+      {/* <ExampleUseState /> */}
+      {/* <button onClick={() => setVisible(!click)}>{click ? "ON" : "OFF"}</button>
+      <ClickComponent click={click} /> */}
 
       {/* <BlinkCompnent text="이건 깜빡입니다." />
         <CountComponent />
