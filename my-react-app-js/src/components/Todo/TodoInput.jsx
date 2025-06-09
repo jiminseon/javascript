@@ -10,6 +10,7 @@ export default function TodoInput({
   return (
     <div>
       <h2>Todo App</h2>
+      todo
       <input
         type="text"
         value={text}
@@ -20,6 +21,7 @@ export default function TodoInput({
       ></input>
       <button onClick={handleAdd}>입력</button>
       <p />
+      find
       <input
         type="text"
         value={find}

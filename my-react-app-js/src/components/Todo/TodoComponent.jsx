@@ -34,6 +34,28 @@ export default function TodoComponent() {
     return result;
   };
 
+  useEffect(() => {
+    const saved = localStorage.getItem("todos");
+    if (saved) {
+      setArr(JSON.parse(saved));
+    }
+  }, []);
+
+  useEffect(() => {
+    const saved2 = localStorage.getItem("finds");
+    if (saved2) {
+      setFindArr(JSON.parse(saved2));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(arr));
+  }, [arr]);
+
+  useEffect(() => {
+    localStorage.setItem("finds", JSON.stringify(findArr));
+  }, [findArr]);
+
   return (
     <div
       style={{
