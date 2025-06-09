@@ -61,11 +61,9 @@ export default function TodoComponent() {
   const handleDelete = (indexToDelete) => {
     const deletedItem = arr[indexToDelete];
 
-    // 1. arr에서 삭제
     const newArr = arr.filter((_, index) => index !== indexToDelete);
     setArr(newArr);
 
-    // 2. findArr에서도 해당 text 가진 항목 삭제
     const newFindArr = findArr.filter((item) => item.text !== deletedItem.text);
     setFindArr(newFindArr);
   };

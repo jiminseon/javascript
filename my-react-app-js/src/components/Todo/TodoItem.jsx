@@ -19,7 +19,7 @@ export default function TodoItem({ text, color, handleDelete }) {
       >
         삭제
       </button>
-      <button
+      {/* <button
         style={{
           width: "50px",
           float: "right",
@@ -29,7 +29,7 @@ export default function TodoItem({ text, color, handleDelete }) {
         onClick={handleDelete}
       >
         수정
-      </button>
+      </button> */}
     </div>
   );
 }
