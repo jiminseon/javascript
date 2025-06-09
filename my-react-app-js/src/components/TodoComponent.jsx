@@ -31,9 +31,9 @@ export default function TodoComponent() {
       </div>
       <div>
         <h3>Todo Items</h3>
-        <div class="items">
+        <div>
           {arr.map((elem) => (
-            <div>{elem}</div>
+            <div style={{ backgroundColor: {} }}>{elem}</div>
           ))}
         </div>
       </div>
