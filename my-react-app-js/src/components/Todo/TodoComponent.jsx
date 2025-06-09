@@ -17,7 +17,6 @@ export default function TodoComponent() {
     setText("");
   };
 
-  // 문장 입력 -> 필터링 -> 리스트에 추가
   const handleFind = () => {
     const filtered = filterText(find);
     setFindArr(filtered);
@@ -25,7 +24,6 @@ export default function TodoComponent() {
     console.log(filtered);
   };
 
-  // 금지어 마스킹 함수
   const filterText = (find) => {
     const result = [];
     arr.forEach((elem) => {
@@ -60,6 +58,18 @@ export default function TodoComponent() {
     }
   }, []);
 
+  const handleDelete = (indexToDelete) => {
+    const deletedItem = arr[indexToDelete];
+
+    // 1. arr에서 삭제
+    const newArr = arr.filter((_, index) => index !== indexToDelete);
+    setArr(newArr);
+
+    // 2. findArr에서도 해당 text 가진 항목 삭제
+    const newFindArr = findArr.filter((item) => item.text !== deletedItem.text);
+    setFindArr(newFindArr);
+  };
+
   return (
     <div
       style={{
@@ -78,7 +88,7 @@ export default function TodoComponent() {
         handleFind={handleFind}
       />
       <Colorbar setSelectedColor={setSelectedColor} />
-      <TodoList arr={arr} />
+      <TodoList arr={arr} handleDelete={handleDelete} />
       <FindList findArr={findArr} />
     </div>
   );
