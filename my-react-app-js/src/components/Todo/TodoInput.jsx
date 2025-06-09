@@ -1,4 +1,12 @@
-export default function TodoInput({ text, setText, selectedColor, add }) {
+export default function TodoInput({
+  text,
+  setText,
+  find,
+  setFind,
+  selectedColor,
+  handleAdd,
+  handleFind,
+}) {
   return (
     <div>
       <h2>Todo App</h2>
@@ -10,7 +18,16 @@ export default function TodoInput({ text, setText, selectedColor, add }) {
         }}
         style={{ backgroundColor: selectedColor }}
       ></input>
-      <button onClick={add}>입력</button>
+      <button onClick={handleAdd}>입력</button>
+      <p />
+      <input
+        type="text"
+        value={find}
+        onChange={(e) => {
+          setFind(e.target.value);
+        }}
+      ></input>
+      <button onClick={handleFind}>입력</button>
     </div>
   );
 }
