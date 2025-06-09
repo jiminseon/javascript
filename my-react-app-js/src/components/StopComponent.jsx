@@ -32,3 +32,51 @@ export default function StopComponent() {
     </div>
   );
 }
+
+// --------------------------------------
+// 강사님 코드
+// export default function StopWatch() {
+//   const [seconds, setSeconds] = useState(0);
+//   const [isStarting, setIsStarting] = useState(false);
+
+//   const onClickStart = () => {
+//     setIsStarting(true);
+//   };
+
+//   const onClickStop = () => {
+//     setIsStarting(false);
+//   };
+
+//   const onClickReset = () => {
+//     setSeconds(0);
+//   };
+
+//   useEffect(() => {
+//     if (isStarting) {
+//       const intervalId = setInterval(() => {
+//         // setState함수 두가지 사용법.
+//         // setState(값) ==> state를 해당 값으로 하겠다.
+//         // setState((prevState)=>{ return newState })
+//         //   ==> 이전 state를 인자로 받아서 새로운 state를 return
+//         // setSeconds(seconds + 1);
+//         setSeconds((prev) => prev + 1);
+//       }, 1000);
+//       return () => {
+//         clearInterval(intervalId);
+//       };
+//     }
+//   }, [isStarting]);
+
+//   return (
+//     <div>
+//       <h1>StopWatch</h1>
+//       <div>
+//         <button onClick={onClickStart}>Start</button>
+//         <button onClick={onClickStop}>Stop</button>
+//         <button onClick={onClickReset}>Reset</button>
+//       </div>
+
+//       <div>현재 초: {seconds}</div>
+//     </div>
+//   );
+// }
