@@ -1,13 +1,5 @@
 import TodoItem from "./TodoItem";
-export default function TodoList({
-  arr,
-  handleDelete,
-  handleModify,
-  modifyText,
-  setModifyText,
-  isEditing,
-  setIsEditing,
-}) {
+export default function TodoList({ arr, handleDelete, handleModify }) {
   return (
     <div>
       <h3>Todo Items</h3>
@@ -15,14 +7,11 @@ export default function TodoList({
         {arr.map((elem, index) => (
           <TodoItem
             key={index}
+            index={index}
             text={elem.text}
             color={elem.color}
             handleDelete={() => handleDelete(index)}
-            handleModify={() => handleModify(index, elem.text, isEditing)}
-            modifyText={modifyText}
-            setModifyText={setModifyText}
-            isEditing={isEditing}
-            setIsEditing={setIsEditing}
+            handleModify={handleModify}
           />
         ))}
       </div>
