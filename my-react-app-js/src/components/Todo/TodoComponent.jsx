@@ -11,6 +11,7 @@ export default function TodoComponent() {
   const [find, setFind] = useState("");
   const [findArr, setFindArr] = useState([]);
   const [selectedColor, setSelectedColor] = useState("pink");
+  const [modifyText, setModifyText] = useState("");
 
   const handleAdd = () => {
     setArr([...arr, { text, color: selectedColor }]);
@@ -66,7 +67,17 @@ export default function TodoComponent() {
 
     const newFindArr = findArr.filter((item) => item.text !== deletedItem.text);
     setFindArr(newFindArr);
+
+    localStorage.setItem("todos", JSON.stringify(newArr));
+    localStorage.setItem("finds", JSON.stringify(newFindArr));
   };
+
+  const handleModify = (indexToModify, modifyText) => {
+    console.log(modifyText);
+    arr[indexToModify];
+  };
+
+  const handleSave = () => {};
 
   return (
     <div
@@ -86,7 +97,12 @@ export default function TodoComponent() {
         handleFind={handleFind}
       />
       <Colorbar setSelectedColor={setSelectedColor} />
-      <TodoList arr={arr} handleDelete={handleDelete} />
+      <TodoList
+        arr={arr}
+        handleDelete={handleDelete}
+        handleModify={handleModify}
+        modifyText={modifyText}
+      />
       <FindList findArr={findArr} />
     </div>
   );

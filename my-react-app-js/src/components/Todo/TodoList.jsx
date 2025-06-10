@@ -1,5 +1,10 @@
 import TodoItem from "./TodoItem";
-export default function TodoList({ arr, handleDelete }) {
+export default function TodoList({
+  arr,
+  handleDelete,
+  handleModify,
+  modifyText,
+}) {
   return (
     <div>
       <h3>Todo Items</h3>
@@ -10,6 +15,8 @@ export default function TodoList({ arr, handleDelete }) {
             text={elem.text}
             color={elem.color}
             handleDelete={() => handleDelete(index)}
+            handleModify={() => handleModify(index, elem.text)}
+            modifyText={modifyText}
           />
         ))}
       </div>
