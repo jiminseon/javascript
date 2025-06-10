@@ -77,6 +77,7 @@ export function TodoProvider({ children }) {
     localStorage.setItem("todos", JSON.stringify(newArr));
     localStorage.setItem("finds", JSON.stringify(newFindArr));
   };
+
   //todo 수정
   const editTodo = (id, newText) => {
     const newArr = arr.map((item) =>
@@ -86,18 +87,21 @@ export function TodoProvider({ children }) {
     localStorage.setItem("todos", JSON.stringify(newArr));
   };
 
+  // localStorage에 todo저장
   useEffect(() => {
     if (arr.length > 0) {
       localStorage.setItem("todos", JSON.stringify(arr));
     }
   }, [arr]);
 
+  // localStorage에 finds저장
   useEffect(() => {
     if (findArr.length > 0) {
       localStorage.setItem("finds", JSON.stringify(findArr));
     }
   }, [findArr]);
 
+  // localStorage todo 불러오기
   useEffect(() => {
     const saved = localStorage.getItem("todos");
     if (saved) {
@@ -105,6 +109,7 @@ export function TodoProvider({ children }) {
     }
   }, []);
 
+  // localStorage finds 불러오기
   useEffect(() => {
     const saved2 = localStorage.getItem("finds");
     if (saved2) {
