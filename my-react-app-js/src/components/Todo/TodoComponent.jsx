@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../../todo.css";
 import TodoInput from "./TodoInput";
 import Colorbar from "./Colorbar";
@@ -11,9 +11,15 @@ export default function TodoComponent() {
   const [find, setFind] = useState("");
   const [findArr, setFindArr] = useState([]);
   const [selectedColor, setSelectedColor] = useState("pink");
+  const idRef = useRef(1);
 
   const handleAdd = () => {
-    setArr([...arr, { text, color: selectedColor }]);
+    const newItem = {
+      id: idRef.current++,
+      text,
+      color: selectedColor,
+    };
+    setArr([...arr, newItem]);
     setText("");
   };
 
@@ -58,23 +64,23 @@ export default function TodoComponent() {
     }
   }, []);
 
-  const handleDelete = (indexToDelete) => {
+  const handleDelete = (idToDelete) => {
     console.log("삭제");
-    const deletedItem = arr[indexToDelete];
+    const deletedItem = arr.find((item) => item.id === idToDelete);
 
-    const newArr = arr.filter((_, index) => index !== indexToDelete);
+    const newArr = arr.filter((item) => item.id !== idToDelete);
     setArr(newArr);
 
-    const newFindArr = findArr.filter((item) => item.text !== deletedItem.text);
+    const newFindArr = findArr.filter((item) => item.id !== deletedItem.id);
     setFindArr(newFindArr);
 
     localStorage.setItem("todos", JSON.stringify(newArr));
     localStorage.setItem("finds", JSON.stringify(newFindArr));
   };
 
-  const handleModify = (index, newText) => {
-    const newArr = arr.map((item, i) =>
-      i === index ? { ...item, text: newText } : item
+  const handleModify = (id, newText) => {
+    const newArr = arr.map((item) =>
+      item.id === id ? { ...item, text: newText } : item
     );
     setArr(newArr);
     localStorage.setItem("todos", JSON.stringify(newArr));

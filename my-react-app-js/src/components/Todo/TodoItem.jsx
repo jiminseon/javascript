@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function TodoItem({
-  index,
+  id,
   text,
   color,
   handleDelete,
@@ -12,7 +12,7 @@ export default function TodoItem({
 
   const handleEditClick = () => {
     if (isEditing) {
-      handleModify(index, modifyText);
+      handleModify(id, modifyText);
     }
     setIsEditing(!isEditing);
   };

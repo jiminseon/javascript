@@ -4,13 +4,13 @@ export default function TodoList({ arr, handleDelete, handleModify }) {
     <div>
       <h3>Todo Items</h3>
       <div>
-        {arr.map((elem, index) => (
+        {arr.map((elem) => (
           <TodoItem
-            key={index}
-            index={index}
+            key={elem.id}
+            id={elem.id}
             text={elem.text}
             color={elem.color}
-            handleDelete={() => handleDelete(index)}
+            handleDelete={() => handleDelete(elem.id)}
             handleModify={handleModify}
           />
         ))}
