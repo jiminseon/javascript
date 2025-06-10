@@ -1,10 +1,13 @@
 import FindItem from "./FindItem";
-export default function FindList({ findArr }) {
+import { useTodo } from "./TodoProvider";
+
+export default function FindList() {
+  const ctx = useTodo();
   return (
     <div>
       <h3>Find Items</h3>
       <div>
-        {findArr.map((elem, index) => (
+        {ctx.findArr.map((elem, index) => (
           <FindItem key={index} text={elem.text} color={elem.color} />
         ))}
       </div>

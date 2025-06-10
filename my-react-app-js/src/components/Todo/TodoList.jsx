@@ -1,17 +1,20 @@
 import TodoItem from "./TodoItem";
-export default function TodoList({ arr, handleDelete, handleModify }) {
+import React from "react";
+import { useTodo } from "./TodoProvider";
+export default function TodoList() {
+  const ctx = useTodo();
   return (
     <div>
       <h3>Todo Items</h3>
       <div>
-        {arr.map((elem) => (
+        {ctx.arr.map((elem) => (
           <TodoItem
             key={elem.id}
             id={elem.id}
             text={elem.text}
             color={elem.color}
-            handleDelete={() => handleDelete(elem.id)}
-            handleModify={handleModify}
+            handleDelete={() => ctx.removeTodo(elem.id)}
+            handleModify={ctx.editTodo}
           />
         ))}
       </div>

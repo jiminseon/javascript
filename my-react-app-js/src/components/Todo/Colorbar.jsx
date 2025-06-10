@@ -1,4 +1,6 @@
-export default function Colorbar({ setSelectedColor }) {
+import { useTodo } from "./TodoProvider";
+export default function Colorbar() {
+  const ctx = useTodo();
   const colorOptions = [
     { className: "circle1", color: "white" },
     { className: "circle2", color: "red" },
@@ -11,7 +13,7 @@ export default function Colorbar({ setSelectedColor }) {
       {colorOptions.map(({ className, color }) => (
         <div
           className={`circle ${className}`}
-          onClick={() => setSelectedColor(color)}
+          onClick={() => ctx.setSelectedColor(color)}
         ></div>
       ))}
     </div>

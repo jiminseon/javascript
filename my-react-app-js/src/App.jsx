@@ -8,8 +8,7 @@ import TodoComponent from "./components/Todo/TodoComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  return <ContextApp />;
-  // return <TodoComponent />;
+  return <TodoComponent />;
 }
 
 export default App;

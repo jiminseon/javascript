@@ -1,35 +1,32 @@
-export default function TodoInput({
-  text,
-  setText,
-  find,
-  setFind,
-  selectedColor,
-  handleAdd,
-  handleFind,
-}) {
+import React from "react";
+import { useTodo } from "./TodoProvider";
+
+export default function TodoInput() {
+  const ctx = useTodo();
+
   return (
     <div>
       <h2>Todo App</h2>
       todo
       <input
         type="text"
-        value={text}
+        value={ctx.text}
         onChange={(e) => {
-          setText(e.target.value);
+          ctx.setText(e.target.value);
         }}
-        style={{ backgroundColor: selectedColor }}
+        style={{ backgroundColor: ctx.selectedColor }}
       ></input>
-      <button onClick={handleAdd}>입력</button>
+      <button onClick={ctx.addTodo}>입력</button>
       <p />
       find
       <input
         type="text"
-        value={find}
+        value={ctx.find}
         onChange={(e) => {
-          setFind(e.target.value);
+          ctx.setFind(e.target.value);
         }}
       ></input>
-      <button onClick={handleFind}>입력</button>
+      <button onClick={ctx.findTodo}>입력</button>
     </div>
   );
 }
