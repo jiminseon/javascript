@@ -4,6 +4,9 @@ export default function TodoList({
   handleDelete,
   handleModify,
   modifyText,
+  setModifyText,
+  isEditing,
+  setIsEditing,
 }) {
   return (
     <div>
@@ -15,8 +18,11 @@ export default function TodoList({
             text={elem.text}
             color={elem.color}
             handleDelete={() => handleDelete(index)}
-            handleModify={() => handleModify(index, elem.text)}
+            handleModify={() => handleModify(index, elem.text, isEditing)}
             modifyText={modifyText}
+            setModifyText={setModifyText}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
           />
         ))}
       </div>

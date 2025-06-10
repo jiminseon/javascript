@@ -12,6 +12,7 @@ export default function TodoComponent() {
   const [findArr, setFindArr] = useState([]);
   const [selectedColor, setSelectedColor] = useState("pink");
   const [modifyText, setModifyText] = useState("");
+  const [isEditing, setIsEditing] = useState(true);
 
   const handleAdd = () => {
     setArr([...arr, { text, color: selectedColor }]);
@@ -60,6 +61,7 @@ export default function TodoComponent() {
   }, []);
 
   const handleDelete = (indexToDelete) => {
+    console.log("삭제");
     const deletedItem = arr[indexToDelete];
 
     const newArr = arr.filter((_, index) => index !== indexToDelete);
@@ -72,12 +74,10 @@ export default function TodoComponent() {
     localStorage.setItem("finds", JSON.stringify(newFindArr));
   };
 
-  const handleModify = (indexToModify, modifyText) => {
+  const handleModify = (indexToModify, modifyText, isEditing) => {
     console.log(modifyText);
-    arr[indexToModify];
+    isEditing ? console.log("수정") : console.log("저장");
   };
-
-  const handleSave = () => {};
 
   return (
     <div
@@ -102,6 +102,9 @@ export default function TodoComponent() {
         handleDelete={handleDelete}
         handleModify={handleModify}
         modifyText={modifyText}
+        setModifyText={setModifyText}
+        isEditing={isEditing}
+        setIsEditing={setIsEditing}
       />
       <FindList findArr={findArr} />
     </div>

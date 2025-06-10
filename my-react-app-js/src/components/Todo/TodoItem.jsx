@@ -6,9 +6,10 @@ export default function TodoItem({
   handleDelete,
   handleModify,
   modifyText,
+  setModifyText,
+  isEditing,
+  setIsEditing,
 }) {
-  const [isEditing, setIsEditing] = useState(true);
-
   return (
     <div>
       {isEditing ? (
@@ -20,7 +21,6 @@ export default function TodoItem({
             width: "70%",
             margin: "5px auto",
             cursor: "default",
-
             border: "none", // 테두리 제거
             outline: "none", // 포커스 테두리 제거
             pointerEvents: "none",
@@ -36,7 +36,9 @@ export default function TodoItem({
             width: "70%",
             margin: "5px auto",
           }}
-          readonly
+          onChange={(e) => {
+            setModifyText(e.target.value);
+          }}
         />
       )}
       <button
@@ -58,7 +60,7 @@ export default function TodoItem({
           padding: 0, // 여백 제거 (선택)
         }}
         onClick={() => {
-          isEditing ? handleModify() : handleSave();
+          handleModify();
           setIsEditing(!isEditing);
         }}
       >
