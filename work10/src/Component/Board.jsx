@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "../Board.css"; // CSS 파일 불러오기
+import "../Board.css";
 
 export default function Board() {
   const [data, setData] = useState([]);
@@ -23,60 +23,46 @@ export default function Board() {
   };
 
   const handleModify = async (id, text) => {
+    console.log("수정");
     const res = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${id}`,
       {
         method: "PATCH",
         body: JSON.stringify({
-          title: "foo",
+          title: { text },
         }),
       }
     );
   };
+
   return (
     <div className="board-container">
       <h2 className="board-title">게시판</h2>
-      <table className="board-table">
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>삭제</th>
-            <th>수정</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, idx) => (
-            <tr key={item.id}>
-              <td>{idx + 1}</td>
-              <td>
-                <Link
-                  to={`https://jsonplaceholder.typicode.com/posts/${item.id}`}
-                  className="board-link"
-                >
-                  {item.title}
-                </Link>
-              </td>
-              <td>
-                <button
-                  onClick={() => handleDelete(item.id)}
-                  className="delete-btn"
-                >
-                  삭제
-                </button>
-              </td>
-              <td>
-                <button
-                  onClick={() => handleModify(item.id, text)}
-                  className="delete-btn"
-                >
-                  수정
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ul className="board-list">
+        {data.map((item, idx) => (
+          <li key={item.id} className="board-item">
+            <span className="board-index">{idx + 1}.</span>
+            <a
+              href={`https://jsonplaceholder.typicode.com/posts/${item.id}`}
+              className="board-link"
+            >
+              {item.title}
+            </a>
+            <button
+              onClick={() => handleDelete(item.id)}
+              className="delete-btn"
+            >
+              삭제
+            </button>
+            <button
+              onClick={() => handleModify(item.id)}
+              className="delete-btn"
+            >
+              수정
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
