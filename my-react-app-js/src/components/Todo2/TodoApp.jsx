@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import TodoInput from "./TodoInput";
 import Colorbar from "./ColorBar";
 import TodoList from "./TodoList";
+import { v4 as uuidv4 } from "uuid";
 
+// ID부여
+// - uuid
+// - state하나 사용 -> 초기값 0 => Auto-Increment
 const COLORS = ["white", "red", "yellow", "pink"];
 
 /**
@@ -19,19 +23,49 @@ export default function TodoApp() {
 
   const [todoList, setTodoList] = useState([]); // {color: string, text: string}
 
+  // 검색어 입력 State
+  const [searchText, setSearchText] = useState("");
+
+  const removeTodo = (todoId) => {
+    const newTodoList = todoList.filter((todo, idx) => {
+      return todoId !== todo.id;
+    });
+    setTodoList(newTodoList);
+
+    localStorage.setItem("todo-list", JSON.stringify(newTodoList));
+  };
+
+  // const searchedTodoList = todoList.filter((todo) => {
+  //   const todoText = todo.text; // string
+  //   return todoText.includes(searchText);
+  // });
+  const searchedTodoList = useMemo(() => {
+    return todoList.filter((todo) => {
+      const todoText = todo.text;
+      return todoText.includes(searchText);
+    });
+  }, [todoList, searchText]);
+
   const addTodo = ({ text, color }) => {
-    const newTodoList = [...todoList, { text, color }];
+    const newTodoList = [...todoList, { id: uuidv4(), text, color }];
 
     // setState함수는 비동기로 동작 --> Promise가 아님.
     setTodoList(newTodoList);
+
+    // localStorage.setItem("todo-list", newTodoList);
 
     localStorage.setItem("todo-list", JSON.stringify(newTodoList));
   };
 
   useEffect(() => {
     const loadedTodoListStr = localStorage.getItem("todo-list");
+
     if (loadedTodoListStr) {
       const loadedTodoList = JSON.parse(loadedTodoListStr);
+      // const loadedTodoList = loadedTodoListStr;
+      // console.log(loadedTodoListStr);
+      // console.log(typeof loadedTodoListStr);
+
       setTodoList(loadedTodoList);
     }
   }, []);
@@ -60,6 +94,15 @@ export default function TodoApp() {
                 // setInputText={setInputText}
               />
             </div>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <input
+                type="text"
+                style={{ flexGrow: 1, padding: 5 }}
+                name="검색"
+                placeholder="검색어를 입력하여 주세요."
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+            </div>
 
             <div
               style={{
@@ -77,7 +120,11 @@ export default function TodoApp() {
             <div>
               <h2>Todo Items</h2>
               <div>
-                <TodoList todoList={todoList} />
+                <TodoList
+                  // todoList={todoList}
+                  todoList={searchedTodoList}
+                  removeTodo={removeTodo}
+                />
               </div>
             </div>
           </div>
