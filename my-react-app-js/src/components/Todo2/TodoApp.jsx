@@ -57,6 +57,23 @@ export default function TodoApp() {
     localStorage.setItem("todo-list", JSON.stringify(newTodoList));
   };
 
+  // 수정
+  const editTodo = (todoId, newTodo) => {
+    const newTodoList = todoList.map((todo) => {
+      if (todo.id === todoId) {
+        return {
+          ...todo,
+          ...newTodo,
+          id: todo.id,
+        };
+      }
+      return todo;
+    });
+
+    setTodoList(newTodoList);
+    localStorage.setItem("todo-list", JSON.stringify(newTodoList));
+  };
+
   useEffect(() => {
     const loadedTodoListStr = localStorage.getItem("todo-list");
 
@@ -123,6 +140,7 @@ export default function TodoApp() {
                 <TodoList
                   // todoList={todoList}
                   todoList={searchedTodoList}
+                  editTodo={editTodo}
                   removeTodo={removeTodo}
                 />
               </div>
