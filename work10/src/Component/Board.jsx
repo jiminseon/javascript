@@ -22,15 +22,27 @@ export default function Board() {
     setData((prev) => prev.filter((item) => item.id !== id));
   };
 
+  const handleModify = async (id, text) => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          title: "foo",
+        }),
+      }
+    );
+  };
   return (
     <div className="board-container">
-      <h2 className="board-title">📋 게시판</h2>
+      <h2 className="board-title">게시판</h2>
       <table className="board-table">
         <thead>
           <tr>
             <th>번호</th>
             <th>제목</th>
             <th>삭제</th>
+            <th>수정</th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +63,14 @@ export default function Board() {
                   className="delete-btn"
                 >
                   삭제
+                </button>
+              </td>
+              <td>
+                <button
+                  onClick={() => handleModify(item.id, text)}
+                  className="delete-btn"
+                >
+                  수정
                 </button>
               </td>
             </tr>

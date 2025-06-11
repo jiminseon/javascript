@@ -1,5 +1,5 @@
 .board-container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 50px auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -28,10 +28,6 @@
   padding: 12px;
   border-bottom: 1px solid #ccc;
   text-align: center;
-}
-
-.board-table tr:hover {
-  background-color: #f1f1f1;
 }
 
 .board-link {
