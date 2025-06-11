@@ -6,7 +6,18 @@ export default function Board() {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((json) => setData(json));
-  });
+  }, []);
+
+  const deletePosts = async (id) => {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+    setData((prev) => prev.filter((item) => item.id !== id));
+  };
+
   return (
     <div>
       {data.map((item) => (
@@ -17,6 +28,7 @@ export default function Board() {
           <a href={`https://jsonplaceholder.typicode.com/posts/${item.id}`}>
             {item.title}
           </a>
+          <button onClick={() => deletePosts(item.id)}>삭제</button>
         </div>
       ))}
     </div>
