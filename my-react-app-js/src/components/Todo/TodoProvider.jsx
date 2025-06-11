@@ -26,6 +26,7 @@ const initialContext = {
 
 const TodoContext = createContext(initialContext);
 
+// 검색이 된 상태에서 todo 수정시 검색 item도 바뀌거나 추가하는거 구현!!!!!!!!
 export function TodoProvider({ children }) {
   // state선언.
   //   const todoList = []; // hook사용 필요
