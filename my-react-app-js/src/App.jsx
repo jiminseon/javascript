@@ -6,6 +6,7 @@ import MemoExample from "./components/MemoExample/MemoExample";
 import PrimeCalculator from "./components/PrimeCalculator";
 import TodoComponent from "./components/Todo/TodoComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
+import TodoApp from "./components/Todo2/TodoApp";
 
 function App() {
   return <TodoComponent />;
