@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "../Board.css";
 
 export default function Board() {
   const [data, setData] = useState([]);
+  const [editId, setEditId] = useState(null);
+  const [editTitle, setEditTitle] = useState("");
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -12,27 +13,37 @@ export default function Board() {
   }, []);
 
   const handleDelete = async (id) => {
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    });
 
     setData((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const handleModify = async (id, text) => {
-    console.log("수정");
-    const res = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${id}`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({
-          title: { text },
-        }),
-      }
+  const handleModifyClick = (id, currentTitle) => {
+    setEditId(id);
+    setEditTitle(currentTitle);
+  };
+
+  const handleModifySave = async (id) => {
+    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({
+        title: editTitle,
+      }),
+    });
+
+    setData((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, title: editTitle } : item
+      )
     );
+
+    setEditId(null);
+    setEditTitle("");
   };
 
   return (
@@ -42,24 +53,45 @@ export default function Board() {
         {data.map((item, idx) => (
           <li key={item.id} className="board-item">
             <span className="board-index">{idx + 1}.</span>
-            <a
-              href={`https://jsonplaceholder.typicode.com/posts/${item.id}`}
-              className="board-link"
-            >
-              {item.title}
-            </a>
-            <button
-              onClick={() => handleDelete(item.id)}
-              className="delete-btn"
-            >
-              삭제
-            </button>
-            <button
-              onClick={() => handleModify(item.id)}
-              className="delete-btn"
-            >
-              수정
-            </button>
+
+            {editId === item.id ? (
+              <>
+                <input
+                  value={editTitle}
+                  onChange={(e) => setEditTitle(e.target.value)}
+                  className="board-input"
+                />
+                <button
+                  onClick={() => handleModifySave(item.id)}
+                  className="btn"
+                >
+                  저장
+                </button>
+                <button onClick={() => handleDelete(item.id)} className="btn">
+                  삭제
+                </button>
+              </>
+            ) : (
+              <>
+                <a
+                  href={`https://jsonplaceholder.typicode.com/posts/${item.id}`}
+                  className="board-data"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.title}
+                </a>
+                <button
+                  onClick={() => handleModifyClick(item.id, item.title)}
+                  className="btn"
+                >
+                  수정
+                </button>
+                <button onClick={() => handleDelete(item.id)} className="btn">
+                  삭제
+                </button>
+              </>
+            )}
           </li>
         ))}
       </ul>
