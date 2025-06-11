@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoInput from "./TodoInput";
-import Colorbar from "./Colorbar";
+import Colorbar from "./ColorBar";
 import TodoList from "./TodoList";
 
 const COLORS = ["white", "red", "yellow", "pink"];
@@ -20,8 +20,21 @@ export default function TodoApp() {
   const [todoList, setTodoList] = useState([]); // {color: string, text: string}
 
   const addTodo = ({ text, color }) => {
-    setTodoList((prevTodoList) => [...prevTodoList, { text, color }]);
+    const newTodoList = [...todoList, { text, color }];
+
+    // setState함수는 비동기로 동작 --> Promise가 아님.
+    setTodoList(newTodoList);
+
+    localStorage.setItem("todo-list", JSON.stringify(newTodoList));
   };
+
+  useEffect(() => {
+    const loadedTodoListStr = localStorage.getItem("todo-list");
+    if (loadedTodoListStr) {
+      const loadedTodoList = JSON.parse(loadedTodoListStr);
+      setTodoList(loadedTodoList);
+    }
+  }, []);
 
   return (
     <div style={{ backgroundColor: "#0046ff", minHeight: "100vh" }}>
