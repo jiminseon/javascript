@@ -1,11 +1,12 @@
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import Board from "./\bComponent/Board";
+import Board from "./Component/Board";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Board />
-    </>
+    </BrowserRouter>
   );
 }
 
