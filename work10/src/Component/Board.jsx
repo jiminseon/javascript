@@ -36,14 +36,24 @@ export default function Board() {
       }),
     });
 
-    setData((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, title: editTitle } : item
-      )
-    );
+    const handleSave = async (id) => {
+      await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify({
+          title: editTitle,
+        }),
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
 
-    setEditId(null);
-    setEditTitle("");
+      setData(...data, json);
+
+      setEditId(null);
+      setEditTitle("");
+    };
   };
 
   return (
