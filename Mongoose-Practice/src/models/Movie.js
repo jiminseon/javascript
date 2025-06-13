@@ -32,6 +32,7 @@ const MovieSchema = new mongoose.Schema(
   }
 );
 
+// 위랑 똑같
 // MovieSchema.set("toObject", { virtuals: true });
 // MovieSchema.set("toJSON", { virtuals: true });
 
