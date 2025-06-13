@@ -10,6 +10,22 @@ var usersRouter = require("./routes/users");
 const boardRouter = require("./routes/board");
 const birdsRouter = require("./routes/birds");
 
+const mongoose = require("mongoose");
+const DB_URL =
+  "mongodb+srv://admin:admin1234@cluster0.nlqimgu.mongodb.net/Cluster0";
+mongoose
+  .connect(DB_URL, {
+    retryWrites: true,
+    w: "majority",
+    appName: "Cluster0",
+  })
+  .then(() => {
+    console.log("Connected Successful");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 var app = express();
 
 app.use(logger("dev"));
