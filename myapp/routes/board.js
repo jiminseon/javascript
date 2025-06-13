@@ -45,10 +45,16 @@ router.get("/:boardId", async (req, res) => {
 router.put("/:boardId", async (req, res) => {
   const { boardId } = req.params;
   const data = req.body;
-  const board = await Board.findByIdAndUpdate(boardId, {
-    title: data.title,
-    content: data.content,
-  });
+  const board = await Board.findByIdAndUpdate(
+    boardId,
+    {
+      title: data.title,
+      content: data.content,
+    },
+    {
+      new: true,
+    }
+  );
   res.json(board);
 });
 
